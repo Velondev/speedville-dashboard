@@ -1,8 +1,57 @@
 {
   "version": 2,
   "name": "speedville-dashboard",
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "builds": [
+    {
+      "src": "**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.json",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard.html"
+    },
+    {
+      "src": "/training",
+      "dest": "/training.html"
+    },
+    {
+      "src": "/communication",
+      "dest": "/communication.html"
+    },
+    {
+      "src": "/feedback",
+      "dest": "/feedback.html"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+      "dest": "/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -18,50 +67,8 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
         }
       ]
-    },
-    {
-      "source": "/(.*).html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/dashboard.html"
-    },
-    {
-      "source": "/training",
-      "destination": "/training.html"
-    },
-    {
-      "source": "/communication",
-      "destination": "/communication.html"
-    },
-    {
-      "source": "/feedback",
-      "destination": "/feedback.html"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/home",
-      "destination": "/",
-      "permanent": true
     }
   ]
 }
