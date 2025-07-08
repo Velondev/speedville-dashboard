@@ -21,7 +21,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -30,175 +30,163 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px 30px;
             margin-bottom: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
         .header h1 {
             color: #667eea;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #666;
-            font-size: 1.1rem;
         }
 
         .wellness-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .wellness-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 25px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
         }
 
-        .wellness-overview h2 {
-            color: #333;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+        .wellness-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .wellness-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .wellness-circles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .wellness-circle {
-            text-align: center;
-            position: relative;
-        }
-
-        .circle-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
             margin: 0 auto 15px;
         }
 
-        .circle-bg {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #f0f0f0;
-            position: relative;
-            overflow: hidden;
-        }
+        .energy { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+        .mood { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .sleep { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .stress { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .motivation { background: linear-gradient(135deg, #4ecdc4, #44a08d); }
 
-        .circle-fill {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            border-radius: 50%;
-            transition: height 0.8s ease;
-        }
-
-        .circle-value {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
+        .wellness-value {
+            font-size: 2.5rem;
             font-weight: 700;
             color: #333;
+            margin-bottom: 8px;
         }
 
-        .circle-label {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .circle-average {
+        .wellness-label {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
         }
 
-        .energy .circle-fill { background: linear-gradient(to top, #ff6b6b, #ffa500); }
-        .mood .circle-fill { background: linear-gradient(to top, #4ecdc4, #44a08d); }
-        .sleep .circle-fill { background: linear-gradient(to top, #667eea, #764ba2); }
-        .stress .circle-fill { background: linear-gradient(to top, #ff9a9e, #fecfef); }
-        .motivation .circle-fill { background: linear-gradient(to top, #a8edea, #fed6e3); }
+        .progress-ring {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .progress-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 8;
+        }
+
+        .progress-ring .bg {
+            stroke: #e0e0e0;
+        }
+
+        .progress-ring .progress {
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.5s ease;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
 
         .feedback-form {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
-            margin-bottom: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .feedback-form h2 {
-            color: #333;
+        .form-title {
             font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
             margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .form-grid {
-            display: grid;
-            gap: 25px;
+        .form-group {
+            margin-bottom: 25px;
         }
 
-        .slider-group {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 20px;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 15px;
-        }
-
-        .slider-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .energy-icon { background: linear-gradient(135deg, #ff6b6b, #ffa500); }
-        .mood-icon { background: linear-gradient(135deg, #4ecdc4, #44a08d); }
-        .sleep-icon { background: linear-gradient(135deg, #667eea, #764ba2); }
-        .stress-icon { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
-        .motivation-icon { background: linear-gradient(135deg, #a8edea, #fed6e3); }
-
-        .slider-content {
-            flex: 1;
-        }
-
-        .slider-label {
+        .form-label {
+            display: block;
+            margin-bottom: 12px;
             font-weight: 600;
             color: #333;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            font-size: 1.1rem;
         }
 
-        .slider-value {
-            font-size: 1.2rem;
-            color: #667eea;
-            font-weight: 700;
+        .slider-container {
+            position: relative;
+            margin-bottom: 15px;
         }
 
         .slider {
@@ -214,33 +202,38 @@
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
         }
 
         .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             cursor: pointer;
             border: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
         }
 
-        .notes-section {
-            margin-top: 25px;
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #666;
         }
 
-        .notes-section label {
-            display: block;
+        .slider-value {
+            text-align: center;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
+            color: #667eea;
+            margin-top: 8px;
         }
 
         .notes-textarea {
@@ -248,7 +241,7 @@
             min-height: 100px;
             padding: 15px;
             border: 2px solid #e0e0e0;
-            border-radius: 15px;
+            border-radius: 12px;
             font-family: inherit;
             font-size: 1rem;
             resize: vertical;
@@ -265,23 +258,23 @@
             color: white;
             border: none;
             padding: 15px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
+            border-radius: 12px;
             font-size: 1.1rem;
-            margin-top: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
-        .trends-section {
+        .chart-section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
@@ -289,61 +282,93 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .trends-section h2 {
-            color: #333;
+        .chart-title {
             font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
             margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .chart-container {
             position: relative;
-            height: 400px;
-            margin-top: 20px;
+            height: 300px;
+            width: 100%;
         }
 
-        .feedback-history {
+        .history-section {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             margin-top: 30px;
         }
 
-        .history-item {
+        .history-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
+            gap: 12px;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .history-item {
             background: rgba(102, 126, 234, 0.05);
             border-radius: 15px;
-            margin-bottom: 15px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
         }
 
         .history-date {
             font-weight: 600;
             color: #667eea;
-            min-width: 100px;
+            margin-bottom: 10px;
         }
 
-        .history-values {
-            display: flex;
-            gap: 15px;
-            flex: 1;
+        .history-metrics {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
-        .history-value {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.9rem;
+        .history-metric {
+            text-align: center;
+        }
+
+        .history-metric-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .history-metric-label {
+            font-size: 0.8rem;
+            color: #666;
         }
 
         .history-notes {
             color: #666;
             font-style: italic;
-            max-width: 200px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -351,36 +376,20 @@
                 padding: 15px;
             }
             
+            .header {
+                padding: 20px;
+            }
+            
             .header h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
-            .wellness-circles {
+            .wellness-overview {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
             }
             
-            .circle-container {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .circle-value {
-                font-size: 1.5rem;
-            }
-            
-            .slider-group {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .history-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .history-values {
-                flex-wrap: wrap;
+            .chart-container {
+                height: 250px;
             }
         }
     </style>
@@ -388,232 +397,278 @@
 <body>
     <div class="container">
         <div class="header">
+            <a href="index.html" class="back-btn" title="Zurück zur Übersicht">
+                <i class="fas fa-arrow-left"></i>
+            </a>
             <h1>
                 <i class="fas fa-heart"></i>
                 Feedback & Wellness
             </h1>
-            <p>Verfolge dein Wohlbefinden und gib tägliches Feedback zu deinem Training</p>
         </div>
 
         <!-- Wellness Overview -->
         <div class="wellness-overview">
-            <h2>
-                <i class="fas fa-chart-pie"></i>
-                Aktuelle Durchschnittswerte (30 Tage)
-            </h2>
-            <div class="wellness-circles">
-                <div class="wellness-circle energy">
-                    <div class="circle-container">
-                        <div class="circle-bg">
-                            <div class="circle-fill" style="height: 80%"></div>
-                        </div>
-                        <div class="circle-value">8</div>
-                    </div>
-                    <div class="circle-label">Energie</div>
-                    <div class="circle-average">Ø 7.8 (30 Tage)</div>
+            <div class="wellness-card">
+                <div class="wellness-icon energy">
+                    <i class="fas fa-bolt"></i>
                 </div>
-                <div class="wellness-circle mood">
-                    <div class="circle-container">
-                        <div class="circle-bg">
-                            <div class="circle-fill" style="height: 70%"></div>
-                        </div>
-                        <div class="circle-value">7</div>
-                    </div>
-                    <div class="circle-label">Stimmung</div>
-                    <div class="circle-average">Ø 7.2 (30 Tage)</div>
+                <div class="wellness-value" id="energyValue">8</div>
+                <div class="wellness-label">Energie</div>
+                <div class="progress-ring">
+                    <svg>
+                        <circle class="bg" cx="40" cy="40" r="32"></circle>
+                        <circle class="progress energy-progress" cx="40" cy="40" r="32" 
+                                stroke="url(#energyGradient)" 
+                                stroke-dasharray="201.06" 
+                                stroke-dashoffset="40.21"></circle>
+                        <defs>
+                            <linearGradient id="energyGradient">
+                                <stop offset="0%" stop-color="#ff9a9e"/>
+                                <stop offset="100%" stop-color="#fecfef"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
-                <div class="wellness-circle sleep">
-                    <div class="circle-container">
-                        <div class="circle-bg">
-                            <div class="circle-fill" style="height: 90%"></div>
-                        </div>
-                        <div class="circle-value">9</div>
-                    </div>
-                    <div class="circle-label">Schlaf</div>
-                    <div class="circle-average">Ø 8.5 (30 Tage)</div>
+            </div>
+            
+            <div class="wellness-card">
+                <div class="wellness-icon mood">
+                    <i class="fas fa-smile"></i>
                 </div>
-                <div class="wellness-circle stress">
-                    <div class="circle-container">
-                        <div class="circle-bg">
-                            <div class="circle-fill" style="height: 30%"></div>
-                        </div>
-                        <div class="circle-value">3</div>
-                    </div>
-                    <div class="circle-label">Stress</div>
-                    <div class="circle-average">Ø 3.2 (30 Tage)</div>
+                <div class="wellness-value" id="moodValue">7</div>
+                <div class="wellness-label">Stimmung</div>
+                <div class="progress-ring">
+                    <svg>
+                        <circle class="bg" cx="40" cy="40" r="32"></circle>
+                        <circle class="progress mood-progress" cx="40" cy="40" r="32" 
+                                stroke="url(#moodGradient)" 
+                                stroke-dasharray="201.06" 
+                                stroke-dashoffset="60.32"></circle>
+                        <defs>
+                            <linearGradient id="moodGradient">
+                                <stop offset="0%" stop-color="#a8edea"/>
+                                <stop offset="100%" stop-color="#fed6e3"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
-                <div class="wellness-circle motivation">
-                    <div class="circle-container">
-                        <div class="circle-bg">
-                            <div class="circle-fill" style="height: 80%"></div>
-                        </div>
-                        <div class="circle-value">8</div>
-                    </div>
-                    <div class="circle-label">Motivation</div>
-                    <div class="circle-average">Ø 7.9 (30 Tage)</div>
+            </div>
+            
+            <div class="wellness-card">
+                <div class="wellness-icon sleep">
+                    <i class="fas fa-bed"></i>
+                </div>
+                <div class="wellness-value" id="sleepValue">9</div>
+                <div class="wellness-label">Schlaf</div>
+                <div class="progress-ring">
+                    <svg>
+                        <circle class="bg" cx="40" cy="40" r="32"></circle>
+                        <circle class="progress sleep-progress" cx="40" cy="40" r="32" 
+                                stroke="url(#sleepGradient)" 
+                                stroke-dasharray="201.06" 
+                                stroke-dashoffset="20.11"></circle>
+                        <defs>
+                            <linearGradient id="sleepGradient">
+                                <stop offset="0%" stop-color="#667eea"/>
+                                <stop offset="100%" stop-color="#764ba2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="wellness-card">
+                <div class="wellness-icon stress">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="wellness-value" id="stressValue">3</div>
+                <div class="wellness-label">Stress</div>
+                <div class="progress-ring">
+                    <svg>
+                        <circle class="bg" cx="40" cy="40" r="32"></circle>
+                        <circle class="progress stress-progress" cx="40" cy="40" r="32" 
+                                stroke="url(#stressGradient)" 
+                                stroke-dasharray="201.06" 
+                                stroke-dashoffset="140.74"></circle>
+                        <defs>
+                            <linearGradient id="stressGradient">
+                                <stop offset="0%" stop-color="#ff6b6b"/>
+                                <stop offset="100%" stop-color="#ee5a24"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="wellness-card">
+                <div class="wellness-icon motivation">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="wellness-value" id="motivationValue">8</div>
+                <div class="wellness-label">Motivation</div>
+                <div class="progress-ring">
+                    <svg>
+                        <circle class="bg" cx="40" cy="40" r="32"></circle>
+                        <circle class="progress motivation-progress" cx="40" cy="40" r="32" 
+                                stroke="url(#motivationGradient)" 
+                                stroke-dasharray="201.06" 
+                                stroke-dashoffset="40.21"></circle>
+                        <defs>
+                            <linearGradient id="motivationGradient">
+                                <stop offset="0%" stop-color="#4ecdc4"/>
+                                <stop offset="100%" stop-color="#44a08d"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
             </div>
         </div>
 
-        <!-- Feedback Form -->
-        <div class="feedback-form">
-            <h2>
-                <i class="fas fa-plus-circle"></i>
-                Tägliches Feedback hinzufügen
-            </h2>
-            <form id="feedbackForm">
-                <div class="form-grid">
-                    <div class="slider-group">
-                        <div class="slider-icon energy-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <div class="slider-content">
-                            <div class="slider-label">
-                                <span>Energie-Level</span>
-                                <span class="slider-value" id="energyValue">5</span>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Feedback Form -->
+            <div class="feedback-form">
+                <h2 class="form-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    Tägliches Feedback
+                </h2>
+                
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label class="form-label">Energie-Level</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="energySlider" min="1" max="10" value="8">
+                            <div class="slider-labels">
+                                <span>Sehr niedrig</span>
+                                <span>Sehr hoch</span>
                             </div>
-                            <input type="range" class="slider" id="energySlider" min="1" max="10" value="5">
+                            <div class="slider-value" id="energySliderValue">8/10</div>
                         </div>
                     </div>
-
-                    <div class="slider-group">
-                        <div class="slider-icon mood-icon">
-                            <i class="fas fa-smile"></i>
-                        </div>
-                        <div class="slider-content">
-                            <div class="slider-label">
-                                <span>Stimmung</span>
-                                <span class="slider-value" id="moodValue">5</span>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Stimmung</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="moodSlider" min="1" max="10" value="7">
+                            <div class="slider-labels">
+                                <span>Sehr schlecht</span>
+                                <span>Sehr gut</span>
                             </div>
-                            <input type="range" class="slider" id="moodSlider" min="1" max="10" value="5">
+                            <div class="slider-value" id="moodSliderValue">7/10</div>
                         </div>
                     </div>
-
-                    <div class="slider-group">
-                        <div class="slider-icon sleep-icon">
-                            <i class="fas fa-bed"></i>
-                        </div>
-                        <div class="slider-content">
-                            <div class="slider-label">
-                                <span>Schlafqualität</span>
-                                <span class="slider-value" id="sleepValue">5</span>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Schlafqualität</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="sleepSlider" min="1" max="10" value="9">
+                            <div class="slider-labels">
+                                <span>Sehr schlecht</span>
+                                <span>Sehr gut</span>
                             </div>
-                            <input type="range" class="slider" id="sleepSlider" min="1" max="10" value="5">
+                            <div class="slider-value" id="sleepSliderValue">9/10</div>
                         </div>
                     </div>
-
-                    <div class="slider-group">
-                        <div class="slider-icon stress-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="slider-content">
-                            <div class="slider-label">
-                                <span>Stress-Level</span>
-                                <span class="slider-value" id="stressValue">5</span>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Stress-Level</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="stressSlider" min="1" max="10" value="3">
+                            <div class="slider-labels">
+                                <span>Kein Stress</span>
+                                <span>Sehr gestresst</span>
                             </div>
-                            <input type="range" class="slider" id="stressSlider" min="1" max="10" value="5">
+                            <div class="slider-value" id="stressSliderValue">3/10</div>
                         </div>
                     </div>
-
-                    <div class="slider-group">
-                        <div class="slider-icon motivation-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <div class="slider-content">
-                            <div class="slider-label">
-                                <span>Motivation</span>
-                                <span class="slider-value" id="motivationValue">5</span>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Motivation</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="motivationSlider" min="1" max="10" value="8">
+                            <div class="slider-labels">
+                                <span>Sehr niedrig</span>
+                                <span>Sehr hoch</span>
                             </div>
-                            <input type="range" class="slider" id="motivationSlider" min="1" max="10" value="5">
+                            <div class="slider-value" id="motivationSliderValue">8/10</div>
                         </div>
                     </div>
-                </div>
-
-                <div class="notes-section">
-                    <label for="notes">Zusätzliche Notizen</label>
-                    <textarea 
-                        id="notes" 
-                        class="notes-textarea" 
-                        placeholder="Wie fühlst du dich heute? Besondere Beobachtungen zum Training oder Wohlbefinden?"
-                    ></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-save"></i>
-                    Feedback speichern
-                </button>
-            </form>
-        </div>
-
-        <!-- Trends Section -->
-        <div class="trends-section">
-            <h2>
-                <i class="fas fa-chart-line"></i>
-                Wellness-Trends
-            </h2>
-            <div class="chart-container">
-                <canvas id="trendsChart"></canvas>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Zusätzliche Notizen</label>
+                        <textarea class="notes-textarea" id="notesTextarea" 
+                                  placeholder="Wie fühlst du dich heute? Besonderheiten beim Training oder im Alltag?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i>
+                        Feedback speichern
+                    </button>
+                </form>
             </div>
 
-            <div class="feedback-history">
-                <h3 style="margin-bottom: 20px; color: #333;">
-                    <i class="fas fa-history"></i>
-                    Letzte Einträge
-                </h3>
-                <div id="historyContainer">
-                    <!-- History items will be populated by JavaScript -->
+            <!-- Chart Section -->
+            <div class="chart-section">
+                <h2 class="chart-title">
+                    <i class="fas fa-chart-line"></i>
+                    Wellness-Trend
+                </h2>
+                <div class="chart-container">
+                    <canvas id="wellnessChart"></canvas>
                 </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="history-section">
+            <h2 class="history-title">
+                <i class="fas fa-history"></i>
+                Feedback-Verlauf
+            </h2>
+            <div class="history-grid" id="historyGrid">
+                <!-- History items will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
     <script>
-        // Sample feedback data
+        // Sample feedback history
         const feedbackHistory = [
             {
-                date: '2025-07-02',
+                date: 'Heute, 8. Juli 2025',
                 energy: 8,
                 mood: 7,
                 sleep: 9,
                 stress: 3,
                 motivation: 8,
-                notes: 'Sehr guter Tag! Training lief super.'
+                notes: 'Sehr guter Tag! Training lief super und ich fühle mich energiegeladen.'
             },
             {
-                date: '2025-07-01',
+                date: 'Gestern, 7. Juli 2025',
                 energy: 6,
-                mood: 6,
+                mood: 8,
                 sleep: 7,
-                stress: 5,
+                stress: 4,
                 motivation: 7,
-                notes: 'Etwas müde, aber motiviert.'
+                notes: 'Etwas müde nach dem gestrigen intensiven Training, aber gute Stimmung.'
             },
             {
-                date: '2025-06-30',
+                date: 'Vorgestern, 6. Juli 2025',
                 energy: 9,
-                mood: 8,
+                mood: 9,
                 sleep: 8,
                 stress: 2,
                 motivation: 9,
-                notes: 'Fantastischer Tag! Neue Bestzeit beim Laufen.'
+                notes: 'Perfekter Tag! Alles lief wie am Schnürchen.'
             },
             {
-                date: '2025-06-29',
-                energy: 5,
-                mood: 5,
+                date: 'Freitag, 5. Juli 2025',
+                energy: 7,
+                mood: 6,
                 sleep: 6,
                 stress: 6,
                 motivation: 6,
-                notes: 'Durchschnittlicher Tag, könnte besser sein.'
-            },
-            {
-                date: '2025-06-28',
-                energy: 7,
-                mood: 8,
-                sleep: 9,
-                stress: 3,
-                motivation: 8,
-                notes: 'Gute Erholung nach dem gestrigen Training.'
+                notes: 'Durchschnittlicher Tag. Etwas gestresst wegen der Arbeit.'
             }
         ];
 
@@ -623,97 +678,39 @@
             
             sliders.forEach(type => {
                 const slider = document.getElementById(`${type}Slider`);
-                const valueDisplay = document.getElementById(`${type}Value`);
+                const valueDisplay = document.getElementById(`${type}SliderValue`);
                 
                 slider.addEventListener('input', function() {
-                    valueDisplay.textContent = this.value;
+                    valueDisplay.textContent = `${this.value}/10`;
+                    updateProgressRing(type, this.value);
+                    updateWellnessValue(type, this.value);
                 });
             });
         }
 
-        // Render feedback history
-        function renderHistory() {
-            const container = document.getElementById('historyContainer');
-            
-            container.innerHTML = feedbackHistory.slice(0, 5).map(entry => `
-                <div class="history-item">
-                    <div class="history-date">${formatDate(entry.date)}</div>
-                    <div class="history-values">
-                        <div class="history-value">
-                            <i class="fas fa-bolt" style="color: #ff6b6b;"></i>
-                            ${entry.energy}
-                        </div>
-                        <div class="history-value">
-                            <i class="fas fa-smile" style="color: #4ecdc4;"></i>
-                            ${entry.mood}
-                        </div>
-                        <div class="history-value">
-                            <i class="fas fa-bed" style="color: #667eea;"></i>
-                            ${entry.sleep}
-                        </div>
-                        <div class="history-value">
-                            <i class="fas fa-exclamation-triangle" style="color: #ff9a9e;"></i>
-                            ${entry.stress}
-                        </div>
-                        <div class="history-value">
-                            <i class="fas fa-fire" style="color: #a8edea;"></i>
-                            ${entry.motivation}
-                        </div>
-                    </div>
-                    <div class="history-notes">${entry.notes}</div>
-                </div>
-            `).join('');
+        function updateProgressRing(type, value) {
+            const circle = document.querySelector(`.${type}-progress`);
+            const circumference = 2 * Math.PI * 32;
+            const offset = circumference - (value / 10) * circumference;
+            circle.style.strokeDashoffset = offset;
         }
 
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('de-DE', {
-                day: '2-digit',
-                month: '2-digit'
-            });
+        function updateWellnessValue(type, value) {
+            document.getElementById(`${type}Value`).textContent = value;
         }
 
-        // Initialize trends chart
-        function initializeTrendsChart() {
-            const ctx = document.getElementById('trendsChart').getContext('2d');
-            
-            const labels = feedbackHistory.slice().reverse().map(entry => formatDate(entry.date));
+        // Initialize wellness chart
+        function initializeChart() {
+            const ctx = document.getElementById('wellnessChart').getContext('2d');
             
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: labels,
+                    labels: ['5. Juli', '6. Juli', '7. Juli', '8. Juli'],
                     datasets: [
                         {
                             label: 'Energie',
-                            data: feedbackHistory.slice().reverse().map(entry => entry.energy),
-                            borderColor: '#ff6b6b',
-                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
-                            borderWidth: 3,
-                            fill: false,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Stimmung',
-                            data: feedbackHistory.slice().reverse().map(entry => entry.mood),
-                            borderColor: '#4ecdc4',
-                            backgroundColor: 'rgba(78, 205, 196, 0.1)',
-                            borderWidth: 3,
-                            fill: false,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Schlaf',
-                            data: feedbackHistory.slice().reverse().map(entry => entry.sleep),
-                            borderColor: '#667eea',
-                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                            borderWidth: 3,
-                            fill: false,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Stress',
-                            data: feedbackHistory.slice().reverse().map(entry => entry.stress),
+                            data: [7, 9, 6, 8],
                             borderColor: '#ff9a9e',
                             backgroundColor: 'rgba(255, 154, 158, 0.1)',
                             borderWidth: 3,
@@ -721,10 +718,28 @@
                             tension: 0.4
                         },
                         {
-                            label: 'Motivation',
-                            data: feedbackHistory.slice().reverse().map(entry => entry.motivation),
+                            label: 'Stimmung',
+                            data: [6, 9, 8, 7],
                             borderColor: '#a8edea',
                             backgroundColor: 'rgba(168, 237, 234, 0.1)',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Schlaf',
+                            data: [6, 8, 7, 9],
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Motivation',
+                            data: [6, 9, 7, 8],
+                            borderColor: '#4ecdc4',
+                            backgroundColor: 'rgba(78, 205, 196, 0.1)',
                             borderWidth: 3,
                             fill: false,
                             tension: 0.4
@@ -748,55 +763,89 @@
                             beginAtZero: true,
                             max: 10,
                             grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
+                                color: 'rgba(0, 0, 0, 0.1)'
                             }
                         },
                         x: {
                             grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
+                                color: 'rgba(0, 0, 0, 0.1)'
                             }
-                        }
-                    },
-                    elements: {
-                        point: {
-                            radius: 5,
-                            hoverRadius: 8
                         }
                     }
                 }
             });
         }
 
-        // Handle form submission
+        // Render feedback history
+        function renderHistory() {
+            const container = document.getElementById('historyGrid');
+            
+            container.innerHTML = feedbackHistory.map(item => `
+                <div class="history-item">
+                    <div class="history-date">${item.date}</div>
+                    <div class="history-metrics">
+                        <div class="history-metric">
+                            <div class="history-metric-value">${item.energy}</div>
+                            <div class="history-metric-label">Energie</div>
+                        </div>
+                        <div class="history-metric">
+                            <div class="history-metric-value">${item.mood}</div>
+                            <div class="history-metric-label">Stimmung</div>
+                        </div>
+                        <div class="history-metric">
+                            <div class="history-metric-value">${item.sleep}</div>
+                            <div class="history-metric-label">Schlaf</div>
+                        </div>
+                        <div class="history-metric">
+                            <div class="history-metric-value">${item.stress}</div>
+                            <div class="history-metric-label">Stress</div>
+                        </div>
+                        <div class="history-metric">
+                            <div class="history-metric-value">${item.motivation}</div>
+                            <div class="history-metric-label">Motivation</div>
+                        </div>
+                    </div>
+                    ${item.notes ? `<div class="history-notes">"${item.notes}"</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Form submission
         document.getElementById('feedbackForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const newEntry = {
-                date: new Date().toISOString().split('T')[0],
+            const newFeedback = {
+                date: 'Heute, ' + new Date().toLocaleDateString('de-DE', { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric' 
+                }),
                 energy: parseInt(document.getElementById('energySlider').value),
                 mood: parseInt(document.getElementById('moodSlider').value),
                 sleep: parseInt(document.getElementById('sleepSlider').value),
                 stress: parseInt(document.getElementById('stressSlider').value),
                 motivation: parseInt(document.getElementById('motivationSlider').value),
-                notes: document.getElementById('notes').value
+                notes: document.getElementById('notesTextarea').value
             };
             
-            feedbackHistory.unshift(newEntry);
+            // Update history (remove old "today" entry if exists)
+            const todayIndex = feedbackHistory.findIndex(item => item.date.includes('Heute'));
+            if (todayIndex > -1) {
+                feedbackHistory[todayIndex] = newFeedback;
+            } else {
+                feedbackHistory.unshift(newFeedback);
+            }
+            
             renderHistory();
             
-            // Reset form
-            this.reset();
-            document.querySelectorAll('.slider-value').forEach(el => el.textContent = '5');
-            
+            // Show success message
             alert('Feedback erfolgreich gespeichert!');
         });
 
         // Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeSliders();
-            renderHistory();
-            initializeTrendsChart();
-        });
+        initializeSliders();
+        initializeChart();
+        renderHistory();
     </script>
 </body>
 </html>

@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -29,57 +29,85 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px 30px;
             margin-bottom: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
         .header h1 {
             color: #667eea;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 10px;
         }
 
-        .header-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .sport-filters {
+        .filter-tabs {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
 
-        .sport-filter {
-            padding: 10px 20px;
-            border: 2px solid #667eea;
-            background: transparent;
-            color: #667eea;
+        .filter-tab {
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
             border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
             font-weight: 500;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
+            text-decoration: none;
+            color: #666;
         }
 
-        .sport-filter.active,
-        .sport-filter:hover {
-            background: #667eea;
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            border-color: transparent;
+        }
+
+        .filter-tab:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
         }
 
         .add-training-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
             color: white;
             border: none;
             padding: 12px 25px;
@@ -91,18 +119,65 @@
             align-items: center;
             gap: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
         }
 
         .add-training-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 auto 15px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .training-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 25px;
-            margin-bottom: 30px;
         }
 
         .training-card {
@@ -113,28 +188,17 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
-            overflow: hidden;
         }
 
         .training-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .training-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .training-header {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: flex-start;
             margin-bottom: 20px;
         }
 
@@ -144,22 +208,26 @@
             gap: 12px;
         }
 
-        .sport-icon {
-            width: 50px;
-            height: 50px;
+        .training-icon {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
 
-        .training-info h3 {
+        .running { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .cycling { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .swimming { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .strength { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+        .training-name {
             font-size: 1.3rem;
+            font-weight: 600;
             color: #333;
-            margin-bottom: 5px;
         }
 
         .training-date {
@@ -181,8 +249,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
 
         .edit-btn {
@@ -207,8 +275,8 @@
 
         .training-metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
             margin-bottom: 20px;
         }
 
@@ -217,7 +285,7 @@
         }
 
         .metric-value {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: #333;
             margin-bottom: 5px;
@@ -227,68 +295,29 @@
             color: #666;
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .training-notes {
             background: rgba(102, 126, 234, 0.05);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 15px;
             margin-top: 15px;
         }
 
-        .training-notes h4 {
+        .notes-title {
             color: #667eea;
             font-size: 0.9rem;
+            font-weight: 600;
             margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
-        .training-notes p {
+        .notes-text {
             color: #666;
             font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .stats-summary {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px;
-            border-radius: 15px;
-            background: rgba(102, 126, 234, 0.05);
-        }
-
-        .stat-icon {
-            font-size: 2rem;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         .modal {
@@ -321,14 +350,15 @@
 
         .modal-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 25px;
         }
 
-        .modal-header h2 {
-            color: #333;
+        .modal-title {
             font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
         }
 
         .close-btn {
@@ -337,35 +367,37 @@
             font-size: 1.5rem;
             color: #666;
             cursor: pointer;
+            padding: 5px;
         }
 
         .form-group {
             margin-bottom: 20px;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
             font-weight: 500;
+            color: #333;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-input, .form-select, .form-textarea {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: #667eea;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
         }
 
         .form-row {
@@ -378,11 +410,11 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
+            padding: 15px 30px;
+            border-radius: 10px;
             font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
             width: 100%;
             transition: transform 0.3s ease;
         }
@@ -396,21 +428,31 @@
                 padding: 15px;
             }
             
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .header-controls {
+            .header {
+                padding: 20px;
                 flex-direction: column;
+                gap: 20px;
                 align-items: stretch;
             }
             
-            .sport-filters {
+            .header-left {
+                justify-content: space-between;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .filter-tabs {
                 justify-content: center;
             }
             
             .training-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .training-metrics {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .form-row {
@@ -422,71 +464,74 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>
-                <i class="fas fa-dumbbell"></i>
-                Training
-            </h1>
-            <div class="header-controls">
-                <div class="sport-filters">
-                    <button class="sport-filter active" data-sport="all">
-                        <i class="fas fa-list"></i>
-                        Alle
-                    </button>
-                    <button class="sport-filter" data-sport="running">
-                        <i class="fas fa-running"></i>
-                        Laufen
-                    </button>
-                    <button class="sport-filter" data-sport="cycling">
-                        <i class="fas fa-bicycle"></i>
-                        Radfahren
-                    </button>
-                    <button class="sport-filter" data-sport="swimming">
-                        <i class="fas fa-swimmer"></i>
-                        Schwimmen
-                    </button>
-                    <button class="sport-filter" data-sport="strength">
-                        <i class="fas fa-dumbbell"></i>
-                        Krafttraining
-                    </button>
-                </div>
-                <button class="add-training-btn" onclick="openModal()">
-                    <i class="fas fa-plus"></i>
-                    Neues Training
+            <div class="header-left">
+                <a href="index.html" class="back-btn" title="Zurück zur Übersicht">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h1>
+                    <i class="fas fa-dumbbell"></i>
+                    Training
+                </h1>
+            </div>
+            
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-sport="all">
+                    <i class="fas fa-list"></i>
+                    Alle
+                </button>
+                <button class="filter-tab" data-sport="running">
+                    <i class="fas fa-running"></i>
+                    Laufen
+                </button>
+                <button class="filter-tab" data-sport="cycling">
+                    <i class="fas fa-bicycle"></i>
+                    Radfahren
+                </button>
+                <button class="filter-tab" data-sport="swimming">
+                    <i class="fas fa-swimmer"></i>
+                    Schwimmen
+                </button>
+                <button class="filter-tab" data-sport="strength">
+                    <i class="fas fa-dumbbell"></i>
+                    Krafttraining
                 </button>
             </div>
+            
+            <button class="add-training-btn" onclick="openModal()">
+                <i class="fas fa-plus"></i>
+                Neues Training
+            </button>
         </div>
 
-        <!-- Stats Summary -->
-        <div class="stats-summary">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-calendar-week"></i>
-                    </div>
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">Trainings diese Woche</div>
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-week"></i>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-value">8h 45min</div>
-                    <div class="stat-label">Gesamtzeit</div>
+                <div class="stat-value">12</div>
+                <div class="stat-label">Trainings diese Woche</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-route"></i>
-                    </div>
-                    <div class="stat-value">125.5km</div>
-                    <div class="stat-label">Gesamtdistanz</div>
+                <div class="stat-value">8h 45min</div>
+                <div class="stat-label">Gesamtzeit</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-route"></i>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="stat-value">2,450</div>
-                    <div class="stat-label">Kalorien verbrannt</div>
+                <div class="stat-value">125.5km</div>
+                <div class="stat-label">Gesamtdistanz</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-fire"></i>
                 </div>
+                <div class="stat-value">2,450</div>
+                <div class="stat-label">Kalorien verbrannt</div>
             </div>
         </div>
 
@@ -496,19 +541,19 @@
         </div>
     </div>
 
-    <!-- Add Training Modal -->
+    <!-- Modal for adding new training -->
     <div class="modal" id="trainingModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Neues Training hinzufügen</h2>
+                <h3 class="modal-title">Neues Training hinzufügen</h3>
                 <button class="close-btn" onclick="closeModal()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <form id="trainingForm">
                 <div class="form-group">
-                    <label for="sportType">Sportart</label>
-                    <select id="sportType" required>
+                    <label class="form-label">Sportart</label>
+                    <select class="form-select" id="sportType" required>
                         <option value="">Sportart wählen</option>
                         <option value="running">Laufen</option>
                         <option value="cycling">Radfahren</option>
@@ -518,31 +563,27 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="trainingDate">Datum</label>
-                        <input type="date" id="trainingDate" required>
+                        <label class="form-label">Datum</label>
+                        <input type="date" class="form-input" id="trainingDate" required>
                     </div>
                     <div class="form-group">
-                        <label for="duration">Dauer (Minuten)</label>
-                        <input type="number" id="duration" min="1" required>
+                        <label class="form-label">Dauer (Minuten)</label>
+                        <input type="number" class="form-input" id="duration" min="1" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="distance">Distanz (km)</label>
-                        <input type="number" id="distance" step="0.1" min="0">
+                        <label class="form-label">Distanz (km)</label>
+                        <input type="number" class="form-input" id="distance" step="0.1" min="0">
                     </div>
                     <div class="form-group">
-                        <label for="intensity">Intensität</label>
-                        <select id="intensity">
-                            <option value="low">Niedrig</option>
-                            <option value="medium">Mittel</option>
-                            <option value="high">Hoch</option>
-                        </select>
+                        <label class="form-label">Pace/Geschwindigkeit</label>
+                        <input type="text" class="form-input" id="pace" placeholder="z.B. 5:30 min/km">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="notes">Notizen</label>
-                    <textarea id="notes" rows="3" placeholder="Wie war das Training? Besondere Beobachtungen?"></textarea>
+                    <label class="form-label">Notizen</label>
+                    <textarea class="form-textarea" id="notes" placeholder="Wie war das Training? Besonderheiten?"></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Training speichern</button>
             </form>
@@ -554,84 +595,75 @@
         const trainings = [
             {
                 id: 1,
-                sport: 'running',
-                date: '2025-07-02',
+                type: 'running',
+                name: 'Laufen',
+                date: 'Mittwoch, 2. Juli 2025',
                 duration: 45,
                 distance: 8.5,
-                pace: '5:18',
-                intensity: 'medium',
-                notes: 'Gutes Tempo gehalten, Beine fühlten sich stark an.'
+                pace: '5:18 min/km',
+                notes: 'Gutes Tempo gehalten, Beine fühlten sich stark an.',
+                icon: 'fas fa-running'
             },
             {
                 id: 2,
-                sport: 'cycling',
-                date: '2025-07-01',
+                type: 'cycling',
+                name: 'Radfahren',
+                date: 'Dienstag, 1. Juli 2025',
                 duration: 90,
-                distance: 25.0,
-                speed: '16.7',
-                intensity: 'high',
-                notes: 'Intervalltraining auf der Strecke. Sehr anstrengend aber effektiv.'
+                distance: 25,
+                pace: '16.7 km/h',
+                notes: 'Intervalltraining auf der Strecke. Sehr anstrengend aber effektiv.',
+                icon: 'fas fa-bicycle'
             },
             {
                 id: 3,
-                sport: 'swimming',
-                date: '2025-06-30',
+                type: 'swimming',
+                name: 'Schwimmen',
+                date: 'Montag, 30. Juni 2025',
                 duration: 30,
                 distance: 1.8,
-                pace: '1:42',
-                intensity: 'medium',
-                notes: 'Techniktraining im Pool. Fokus auf Armzug.'
+                pace: '1:42 min/km',
+                notes: 'Techniktraining im Pool. Fokus auf Armzug.',
+                icon: 'fas fa-swimmer'
             },
             {
                 id: 4,
-                sport: 'strength',
-                date: '2025-06-29',
+                type: 'strength',
+                name: 'Krafttraining',
+                date: 'Sonntag, 29. Juni 2025',
                 duration: 60,
                 distance: null,
-                sets: '4x12',
-                intensity: 'high',
-                notes: 'Oberkörpertraining mit Fokus auf Brust und Schultern.'
+                pace: '4x12 Sätze',
+                notes: 'Oberkörpertraining mit Fokus auf Brust und Schultern.',
+                icon: 'fas fa-dumbbell'
             },
             {
                 id: 5,
-                sport: 'running',
-                date: '2025-06-28',
+                type: 'running',
+                name: 'Laufen',
+                date: 'Samstag, 28. Juni 2025',
                 duration: 30,
                 distance: 5.2,
-                pace: '5:45',
-                intensity: 'low',
-                notes: 'Entspannter Erholungslauf am Morgen.'
+                pace: '5:45 min/km',
+                notes: 'Entspannter Erholungslauf am Morgen.',
+                icon: 'fas fa-running'
             }
         ];
 
-        const sportIcons = {
-            running: 'fas fa-running',
-            cycling: 'fas fa-bicycle',
-            swimming: 'fas fa-swimmer',
-            strength: 'fas fa-dumbbell'
-        };
-
-        const sportNames = {
-            running: 'Laufen',
-            cycling: 'Radfahren',
-            swimming: 'Schwimmen',
-            strength: 'Krafttraining'
-        };
-
         function renderTrainings(filter = 'all') {
-            const grid = document.getElementById('trainingGrid');
-            const filteredTrainings = filter === 'all' ? trainings : trainings.filter(t => t.sport === filter);
+            const container = document.getElementById('trainingGrid');
+            const filteredTrainings = filter === 'all' ? trainings : trainings.filter(t => t.type === filter);
             
-            grid.innerHTML = filteredTrainings.map(training => `
-                <div class="training-card" data-sport="${training.sport}">
+            container.innerHTML = filteredTrainings.map(training => `
+                <div class="training-card" data-type="${training.type}">
                     <div class="training-header">
                         <div class="training-type">
-                            <div class="sport-icon">
-                                <i class="${sportIcons[training.sport]}"></i>
+                            <div class="training-icon ${training.type}">
+                                <i class="${training.icon}"></i>
                             </div>
-                            <div class="training-info">
-                                <h3>${sportNames[training.sport]}</h3>
-                                <div class="training-date">${formatDate(training.date)}</div>
+                            <div>
+                                <div class="training-name">${training.name}</div>
+                                <div class="training-date">${training.date}</div>
                             </div>
                         </div>
                         <div class="training-actions">
@@ -643,56 +675,42 @@
                             </button>
                         </div>
                     </div>
+                    
                     <div class="training-metrics">
                         <div class="metric">
                             <div class="metric-value">${training.duration}</div>
                             <div class="metric-label">Minuten</div>
                         </div>
-                        ${training.distance ? `
-                            <div class="metric">
-                                <div class="metric-value">${training.distance}</div>
-                                <div class="metric-label">km</div>
-                            </div>
-                        ` : ''}
-                        ${training.pace ? `
-                            <div class="metric">
-                                <div class="metric-value">${training.pace}</div>
-                                <div class="metric-label">min/km</div>
-                            </div>
-                        ` : ''}
-                        ${training.speed ? `
-                            <div class="metric">
-                                <div class="metric-value">${training.speed}</div>
-                                <div class="metric-label">km/h</div>
-                            </div>
-                        ` : ''}
-                        ${training.sets ? `
-                            <div class="metric">
-                                <div class="metric-value">${training.sets}</div>
-                                <div class="metric-label">Sätze</div>
-                            </div>
-                        ` : ''}
+                        <div class="metric">
+                            <div class="metric-value">${training.distance || '-'}</div>
+                            <div class="metric-label">${training.distance ? 'KM' : '-'}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">${training.pace}</div>
+                            <div class="metric-label">${training.type === 'cycling' ? 'KM/H' : training.type === 'strength' ? '' : 'MIN/KM'}</div>
+                        </div>
                     </div>
+                    
                     ${training.notes ? `
                         <div class="training-notes">
-                            <h4>Notizen</h4>
-                            <p>${training.notes}</p>
+                            <div class="notes-title">Notizen</div>
+                            <div class="notes-text">${training.notes}</div>
                         </div>
                     ` : ''}
                 </div>
             `).join('');
         }
 
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('de-DE', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
+        // Filter functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                renderTrainings(this.dataset.sport);
             });
-        }
+        });
 
+        // Modal functions
         function openModal() {
             document.getElementById('trainingModal').classList.add('active');
             document.getElementById('trainingDate').value = new Date().toISOString().split('T')[0];
@@ -703,8 +721,48 @@
             document.getElementById('trainingForm').reset();
         }
 
+        // Form submission
+        document.getElementById('trainingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const newTraining = {
+                id: trainings.length + 1,
+                type: document.getElementById('sportType').value,
+                name: document.getElementById('sportType').options[document.getElementById('sportType').selectedIndex].text,
+                date: new Date(document.getElementById('trainingDate').value).toLocaleDateString('de-DE', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                }),
+                duration: parseInt(document.getElementById('duration').value),
+                distance: parseFloat(document.getElementById('distance').value) || null,
+                pace: document.getElementById('pace').value || '-',
+                notes: document.getElementById('notes').value,
+                icon: getIconForSport(document.getElementById('sportType').value)
+            };
+            
+            trainings.unshift(newTraining);
+            renderTrainings();
+            closeModal();
+            
+            // Show success message
+            alert('Training erfolgreich hinzugefügt!');
+        });
+
+        function getIconForSport(sport) {
+            const icons = {
+                'running': 'fas fa-running',
+                'cycling': 'fas fa-bicycle',
+                'swimming': 'fas fa-swimmer',
+                'strength': 'fas fa-dumbbell'
+            };
+            return icons[sport] || 'fas fa-dumbbell';
+        }
+
         function editTraining(id) {
-            alert(`Training ${id} bearbeiten - Funktion wird implementiert`);
+            alert('Bearbeiten-Funktion wird implementiert...');
         }
 
         function deleteTraining(id) {
@@ -717,37 +775,6 @@
             }
         }
 
-        // Event listeners
-        document.querySelectorAll('.sport-filter').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.sport-filter').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                renderTrainings(this.dataset.sport);
-            });
-        });
-
-        document.getElementById('trainingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const newTraining = {
-                id: trainings.length + 1,
-                sport: document.getElementById('sportType').value,
-                date: document.getElementById('trainingDate').value,
-                duration: parseInt(document.getElementById('duration').value),
-                distance: parseFloat(document.getElementById('distance').value) || null,
-                intensity: document.getElementById('intensity').value,
-                notes: document.getElementById('notes').value
-            };
-            
-            trainings.unshift(newTraining);
-            renderTrainings();
-            closeModal();
-            
-            // Show success message
-            alert('Training erfolgreich hinzugefügt!');
-        });
-
         // Close modal when clicking outside
         document.getElementById('trainingModal').addEventListener('click', function(e) {
             if (e.target === this) {
@@ -755,7 +782,7 @@
             }
         });
 
-        // Initial render
+        // Initialize
         renderTrainings();
     </script>
 </body>
