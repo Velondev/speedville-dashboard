@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speedville Dashboard - Übersicht</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .header .subtitle {
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .card-features li {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-features li::before {
+            content: '✓';
+            color: #4ecdc4;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .card-action:hover {
+            color: #764ba2;
+        }
+
+        .stats-overview {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-overview h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 25px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .quick-actions {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-actions h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <i class="fas fa-bolt"></i>
+                Speedville Dashboard
+            </h1>
+            <p>Willkommen in Ihrem digitalen Coaching Portal</p>
+            <div class="subtitle">Alle Dashboard-Bereiche im Überblick - Klicken Sie auf eine Karte, um den Bereich zu erkunden</div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="stats-overview">
+            <h2>Aktuelle Statistiken</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Trainings diese Woche</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value">8h 45min</div>
+                    <div class="stat-label">Gesamtzeit</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <div class="stat-value">125.5km</div>
+                    <div class="stat-label">Gesamtdistanz</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="stat-value">8.2</div>
+                    <div class="stat-label">Ø Wellness-Score</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="dashboard-grid">
+            <a href="dashboard.html" class="dashboard-card">
+                <div class="card-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3 class="card-title">Haupt-Dashboard</h3>
+                <p class="card-description">
+                    Zentrale Übersicht über alle wichtigen KPIs, Trainingsfortschritt und aktuelle Aktivitäten.
+                </p>
+                <ul class="card-features">
+                    <li>Interaktive KPI-Karten</li>
+                    <li>Trainingsfortschritt-Charts</li>
+                    <li>Nachrichten-Feed</li>
+                    <li>Aktivitäts-Timeline</li>
+                </ul>
+                <div class="card-action">
+                    <span>Dashboard öffnen</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <a href="training.html" class="dashboard-card">
+                <div class="card-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h3 class="card-title">Training</h3>
+                <p class="card-description">
+                    Verwalten Sie Ihre Trainingseinheiten, analysieren Sie Ihre Leistung und planen Sie neue Workouts.
+                </p>
+                <ul class="card-features">
+                    <li>Training hinzufügen/bearbeiten</li>
+                    <li>Sport-spezifische Filter</li>
+                    <li>Leistungsmetriken</li>
+                    <li>Trainingsnotizen</li>
+                </ul>
+                <div class="card-action">
+                    <span>Training verwalten</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <a href="communication.html" class="dashboard-card">
+                <div class="card-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="card-title">Kommunikation</h3>
+                <p class="card-description">
+                    Direkter Austausch mit Ihrem Coach-Team, Nachrichten senden und empfangen.
+                </p>
+                <ul class="card-features">
+                    <li>Echtzeit-Messaging</li>
+                    <li>Konversations-Übersicht</li>
+                    <li>Online-Status</li>
+                    <li>Nachrichtenverlauf</li>
+                </ul>
+                <div class="card-action">
+                    <span>Nachrichten öffnen</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <a href="feedback.html" class="dashboard-card">
+                <div class="card-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="card-title">Feedback & Wellness</h3>
+                <p class="card-description">
+                    Verfolgen Sie Ihr Wohlbefinden, geben Sie tägliches Feedback und analysieren Sie Trends.
+                </p>
+                <ul class="card-features">
+                    <li>Wellness-Tracking</li>
+                    <li>Tägliches Feedback</li>
+                    <li>Trend-Visualisierung</li>
+                    <li>Subjektive Metriken</li>
+                </ul>
+                <div class="card-action">
+                    <span>Feedback eingeben</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2>Schnellaktionen</h2>
+            <div class="actions-grid">
+                <a href="training.html" class="action-btn">
+                    <i class="fas fa-plus"></i>
+                    Neues Training hinzufügen
+                </a>
+                <a href="feedback.html" class="action-btn">
+                    <i class="fas fa-heart"></i>
+                    Tägliches Feedback eingeben
+                </a>
+                <a href="communication.html" class="action-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Nachricht an Coach senden
+                </a>
+                <a href="dashboard.html" class="action-btn">
+                    <i class="fas fa-chart-line"></i>
+                    Fortschritt analysieren
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Speedville Coaching Portal - Entwickelt mit Chart.js, Font Awesome und modernem CSS Grid</p>
+            <p>Alle Seiten sind vollständig funktional und responsive</p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate stats on load
+            const statValues = document.querySelectorAll('.stat-value');
+            statValues.forEach(stat => {
+                const finalValue = stat.textContent;
+                stat.textContent = '0';
+                
+                // Simple counter animation
+                let current = 0;
+                const target = parseFloat(finalValue);
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = finalValue;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current).toString();
+                    }
+                }, 30);
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.dashboard-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

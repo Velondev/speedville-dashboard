@@ -1,0 +1,33 @@
+{
+  "name": "speedville-dashboard",
+  "version": "1.0.0",
+  "description": "Digitales Coaching Portal Dashboard mit interaktiven Features",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site - no build required'",
+    "start": "echo 'Static site deployed'"
+  },
+  "keywords": [
+    "coaching",
+    "dashboard",
+    "fitness",
+    "training",
+    "wellness",
+    "responsive",
+    "chart.js"
+  ],
+  "author": "Speedville Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR-USERNAME/speedville-dashboard.git"
+  },
+  "homepage": "https://speedville-dashboard.vercel.app",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
+

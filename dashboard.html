@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speedville Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .main-content {
+            display: grid;
+            gap: 30px;
+        }
+
+        .kpi-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .kpi-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .kpi-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .kpi-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .kpi-card .label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .chart-header h3 {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .time-filter {
+            display: flex;
+            gap: 10px;
+        }
+
+        .time-filter button {
+            padding: 8px 16px;
+            border: 2px solid #667eea;
+            background: transparent;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .time-filter button.active,
+        .time-filter button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .sidebar {
+            display: grid;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-card h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-sender {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .message-text {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .message-time {
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+
+        .activity-time {
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        .view-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .view-all-btn:hover {
+            color: #764ba2;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .kpi-cards {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .kpi-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .chart-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <i class="fas fa-bolt"></i>
+                Speedville Dashboard
+            </h1>
+            <div class="subtitle">Willkommen zurück, Max! Hier ist deine Trainingsübersicht.</div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="main-content">
+                <!-- KPI Cards -->
+                <div class="kpi-cards">
+                    <div class="kpi-card">
+                        <div class="icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="value">12</div>
+                        <div class="label">Trainingseinheiten (30 Tage)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="value">8h 45min</div>
+                        <div class="label">Trainingszeit</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="value">125.5km</div>
+                        <div class="label">Distanz</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="value">8</div>
+                        <div class="label">Feedback-Einträge</div>
+                    </div>
+                </div>
+
+                <!-- Training Progress Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-line"></i> Trainingsfortschritt</h3>
+                        <div class="time-filter">
+                            <button class="active">7 Tage</button>
+                            <button>30 Tage</button>
+                            <button>90 Tage</button>
+                        </div>
+                    </div>
+                    <canvas id="progressChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <!-- Recent Messages -->
+                <div class="sidebar-card">
+                    <h3>
+                        <i class="fas fa-comments"></i>
+                        Aktuelle Nachrichten
+                    </h3>
+                    <div class="message-item">
+                        <div class="avatar">CS</div>
+                        <div class="message-content">
+                            <div class="message-sender">Coach Smith</div>
+                            <div class="message-text">Großartige Leistung beim gestrigen Training! Wie fühlst du dich heute?</div>
+                        </div>
+                        <div class="message-time">2h</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="avatar">TM</div>
+                        <div class="message-content">
+                            <div class="message-sender">Team Manager</div>
+                            <div class="message-text">Erinnerung: Morgen ist das Teammeeting um 10:00 Uhr.</div>
+                        </div>
+                        <div class="message-time">5h</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="avatar">SY</div>
+                        <div class="message-content">
+                            <div class="message-sender">System</div>
+                            <div class="message-text">Dein Trainingsplan für nächste Woche ist verfügbar.</div>
+                        </div>
+                        <div class="message-time">1d</div>
+                    </div>
+                    <a href="#" class="view-all-btn">
+                        <span>Alle anzeigen</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="sidebar-card">
+                    <h3>
+                        <i class="fas fa-history"></i>
+                        Letzte Aktivitäten
+                    </h3>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Lauftraining abgeschlossen: 8.5km in 45min</div>
+                            <div class="activity-time">Heute, 07:30</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Wellness-Feedback eingegeben</div>
+                            <div class="activity-time">Heute, 06:45</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-bicycle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Radtraining: 25km in 1h 30min</div>
+                            <div class="activity-time">Gestern, 18:00</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Krafttraining: Oberkörper</div>
+                            <div class="activity-time">Gestern, 16:30</div>
+                        </div>
+                    </div>
+                    <a href="#" class="view-all-btn">
+                        <span>Alle anzeigen</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Training Progress Chart
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        const progressChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+                datasets: [{
+                    label: 'Trainingszeit (Minuten)',
+                    data: [45, 60, 0, 90, 75, 120, 45],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6
+                }, {
+                    label: 'Distanz (km)',
+                    data: [8.5, 12, 0, 25, 15, 30, 8.5],
+                    borderColor: '#764ba2',
+                    backgroundColor: 'rgba(118, 75, 162, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#764ba2',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: {
+                                size: 12,
+                                weight: '500'
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            font: {
+                                size: 11
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            font: {
+                                size: 11
+                            }
+                        }
+                    }
+                },
+                elements: {
+                    point: {
+                        hoverRadius: 8
+                    }
+                }
+            }
+        });
+
+        // Time filter functionality
+        document.querySelectorAll('.time-filter button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.time-filter button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update chart data based on selection
+                const period = this.textContent;
+                if (period === '7 Tage') {
+                    progressChart.data.labels = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+                    progressChart.data.datasets[0].data = [45, 60, 0, 90, 75, 120, 45];
+                    progressChart.data.datasets[1].data = [8.5, 12, 0, 25, 15, 30, 8.5];
+                } else if (period === '30 Tage') {
+                    progressChart.data.labels = ['Woche 1', 'Woche 2', 'Woche 3', 'Woche 4'];
+                    progressChart.data.datasets[0].data = [300, 420, 380, 450];
+                    progressChart.data.datasets[1].data = [65, 85, 75, 95];
+                } else {
+                    progressChart.data.labels = ['Monat 1', 'Monat 2', 'Monat 3'];
+                    progressChart.data.datasets[0].data = [1200, 1350, 1500];
+                    progressChart.data.datasets[1].data = [250, 280, 320];
+                }
+                progressChart.update();
+            });
+        });
+    </script>
+</body>
+</html>
+
