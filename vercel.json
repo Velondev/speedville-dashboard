@@ -1,55 +1,23 @@
 {
   "version": 2,
-  "name": "speedville-dashboard",
-  "builds": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
     {
-      "src": "**/*.html",
-      "use": "@vercel/static"
+      "source": "/dashboard",
+      "destination": "/dashboard.html"
     },
     {
-      "src": "**/*.css",
-      "use": "@vercel/static"
+      "source": "/training", 
+      "destination": "/training.html"
     },
     {
-      "src": "**/*.js",
-      "use": "@vercel/static"
+      "source": "/communication",
+      "destination": "/communication.html"
     },
     {
-      "src": "**/*.json",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/dashboard",
-      "dest": "/dashboard.html"
-    },
-    {
-      "src": "/training",
-      "dest": "/training.html"
-    },
-    {
-      "src": "/communication",
-      "dest": "/communication.html"
-    },
-    {
-      "src": "/feedback",
-      "dest": "/feedback.html"
-    },
-    {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-      "dest": "/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/feedback",
+      "destination": "/feedback.html"
     }
   ],
   "headers": [
@@ -61,12 +29,21 @@
           "value": "SAMEORIGIN"
         },
         {
-          "key": "X-Content-Type-Options",
+          "key": "X-Content-Type-Options", 
           "value": "nosniff"
         },
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }
