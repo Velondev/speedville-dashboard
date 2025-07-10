@@ -4,6 +4,10 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/login.html"
+    },
+    {
       "source": "/dashboard",
       "destination": "/dashboard.html"
     },
@@ -148,3 +152,4 @@
     }
   ]
 }
+
