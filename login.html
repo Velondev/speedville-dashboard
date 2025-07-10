@@ -57,18 +57,39 @@
     <input type="password" id="password" placeholder="Passwort" />
     <button id="loginBtn" onclick="login()">Einloggen</button>
     <div id="error" class="error"></div>
-    <p style="text-align:center;">Noch keinen Account? <a href="/signup.html">Registrieren</a></p>
+    <p style="text-align:center;">Noch keinen Account? <a href="/signup">Registrieren</a></p>
   </div>
 
   <script>
-    // Korrigierte Supabase-Initialisierung
-    const { createClient } = supabase;
-    const supabaseClient = createClient(
-      "https://inbvzgxzudhvmlfhetxm.supabase.co", 
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluYnZ6Z3h6dWRodm1sZmhldHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNDMyMzgsImV4cCI6MjA2NzYxOTIzOH0.ih2sM9mp-MRuqbA1B0gbTDUPcxWV_qz_0DP8-XuErtM"
-    );
+    // Warten bis Supabase geladen ist
+    let supabaseClient;
+    
+    window.addEventListener('load', function() {
+      // Korrekte Supabase-Initialisierung für CDN
+      if (typeof supabase !== 'undefined') {
+        supabaseClient = supabase.createClient(
+          "https://inbvzgxzudhvmlfhetxm.supabase.co", 
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluYnZ6Z3h6dWRodm1sZmhldHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNDMyMzgsImV4cCI6MjA2NzYxOTIzOH0.ih2sM9mp-MRuqbA1B0gbTDUPcxWV_qz_0DP8-XuErtM"
+        );
+        
+        // Prüfen ob bereits angemeldet
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+          if (event === 'SIGNED_IN' && session) {
+            window.location.href = "/dashboard";
+          }
+        });
+      } else {
+        console.error('Supabase nicht geladen');
+        document.getElementById('error').textContent = 'Fehler beim Laden der Anwendung';
+      }
+    });
 
     async function login() {
+      if (!supabaseClient) {
+        document.getElementById('error').textContent = 'Anwendung noch nicht bereit';
+        return;
+      }
+
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       const loginBtn = document.getElementById("loginBtn");
@@ -98,8 +119,8 @@
         // Erfolgreiche Anmeldung - Supabase verwaltet die Session automatisch
         console.log("Login erfolgreich:", data);
         
-        // Redirect zur Dashboard-Seite (mit absolutem Pfad)
-        window.location.href = "/dashboard.html";
+        // Redirect zur Dashboard-Seite
+        window.location.href = "/dashboard";
         
       } catch (error) {
         console.error("Login-Fehler:", error);
@@ -115,13 +136,6 @@
     document.addEventListener("keypress", function(event) {
       if (event.key === "Enter") {
         login();
-      }
-    });
-
-    // Prüfen ob bereits angemeldet
-    supabaseClient.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        window.location.href = "/dashboard.html";
       }
     });
   </script>
