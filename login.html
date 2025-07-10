@@ -12,6 +12,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
     .login-box {
       background: white;
@@ -24,6 +25,7 @@
       width: 100%;
       margin-bottom: 1rem;
       padding: 0.5rem;
+      box-sizing: border-box;
     }
     button {
       width: 100%;
@@ -37,6 +39,15 @@
     button:hover {
       background: #556cd6;
     }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .error {
+      color: red;
+      margin-top: 1rem;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -44,27 +55,75 @@
     <h2>Login</h2>
     <input type="email" id="email" placeholder="E-Mail" />
     <input type="password" id="password" placeholder="Passwort" />
-    <button onclick="login()">Einloggen</button>
-  <p style="text-align:center;">Noch keinen Account? <a href="signup.html">Registrieren</a></p>
+    <button id="loginBtn" onclick="login()">Einloggen</button>
+    <div id="error" class="error"></div>
+    <p style="text-align:center;">Noch keinen Account? <a href="/signup.html">Registrieren</a></p>
+  </div>
+
   <script>
-    const supabase = supabase.createClient("https://inbvzgxzudhvmlfhetxm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluYnZ6Z3h6dWRodm1sZmhldHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNDMyMzgsImV4cCI6MjA2NzYxOTIzOH0.ih2sM9mp-MRuqbA1B0gbTDUPcxWV_qz_0DP8-XuErtM");
+    // Korrigierte Supabase-Initialisierung
+    const { createClient } = supabase;
+    const supabaseClient = createClient(
+      "https://inbvzgxzudhvmlfhetxm.supabase.co", 
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluYnZ6Z3h6dWRodm1sZmhldHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNDMyMzgsImV4cCI6MjA2NzYxOTIzOH0.ih2sM9mp-MRuqbA1B0gbTDUPcxWV_qz_0DP8-XuErtM"
+    );
 
     async function login() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
+      const loginBtn = document.getElementById("loginBtn");
+      const errorDiv = document.getElementById("error");
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+      // Eingaben validieren
+      if (!email || !password) {
+        errorDiv.textContent = "Bitte füllen Sie alle Felder aus.";
+        return;
+      }
 
-      if (error) {
-        alert("Fehler: " + error.message);
-      } else {
-        localStorage.setItem("supabaseSession", JSON.stringify(data.session));
-        window.location.href = "dashboard.html";
+      // Button deaktivieren während des Logins
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Einloggen...";
+      errorDiv.textContent = "";
+
+      try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        // Erfolgreiche Anmeldung - Supabase verwaltet die Session automatisch
+        console.log("Login erfolgreich:", data);
+        
+        // Redirect zur Dashboard-Seite (mit absolutem Pfad)
+        window.location.href = "/dashboard.html";
+        
+      } catch (error) {
+        console.error("Login-Fehler:", error);
+        errorDiv.textContent = "Anmeldung fehlgeschlagen: " + error.message;
+      } finally {
+        // Button wieder aktivieren
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Einloggen";
       }
     }
+
+    // Enter-Taste für Login aktivieren
+    document.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        login();
+      }
+    });
+
+    // Prüfen ob bereits angemeldet
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        window.location.href = "/dashboard.html";
+      }
+    });
   </script>
 </body>
 </html>
