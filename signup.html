@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registrieren</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .signup-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    input {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.5rem;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #556cd6;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <h2>Registrieren</h2>
+    <input type="email" id="email" placeholder="E-Mail" />
+    <input type="password" id="password" placeholder="Passwort" />
+    <button onclick="signup()">Konto erstellen</button>
+  <p style="text-align:center;">Schon einen Account? <a href="login.html">Jetzt einloggen</a></p>
+  <script>
+    const supabase = supabase.createClient("https://DEIN_PROJEKT.supabase.co", "DEIN_PUBLIC_ANON_KEY");
+
+    async function signup() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+      });
+
+      if (error) {
+        alert("Fehler: " + error.message);
+      } else {
+        alert("Registrierung erfolgreich! Du wirst weitergeleitet...");
+        window.location.href = "dashboard.html";
+      }
+    }
+  </script>
+</body>
+</html>
