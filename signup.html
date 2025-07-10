@@ -47,22 +47,23 @@
     <button onclick="signup()">Konto erstellen</button>
   <p style="text-align:center;">Schon einen Account? <a href="login.html">Jetzt einloggen</a></p>
   <script>
-    const supabase = supabase.createClient("https://inbvzgxzudhvmlfhetxm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluYnZ6Z3h6dWRodm1sZmhldHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNDMyMzgsImV4cCI6MjA2NzYxOTIzOH0.ih2sM9mp-MRuqbA1B0gbTDUPcxWV_qz_0DP8-XuErtM");
+   const { createClient } = supabase;
+   const supabaseClient = ("https://inbvzgxzudhvmlfhetxm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluYnZ6Z3h6dWRodm1sZmhldHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNDMyMzgsImV4cCI6MjA2NzYxOTIzOH0.ih2sM9mp-MRuqbA1B0gbTDUPcxWV_qz_0DP8-XuErtM");
 
     async function signup() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password
-      });
-
-      if (error) {
-        alert("Fehler: " + error.message);
-      } else {
-        alert("Registrierung erfolgreich! Du wirst weitergeleitet...");
-        window.location.href = "dashboard.html";
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+  
+    const { data, error } = await supabaseClient.auth.signUp({
+      email,
+      password
+    });
+  
+    if (error) {
+      alert("Fehler: " + error.message);
+    } else {
+      alert("Registrierung erfolgreich! Du wirst weitergeleitet...");
+      window.location.href = "dashboard.html";
       }
     }
   </script>
